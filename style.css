@@ -6,6 +6,26 @@ body {
     font-family: Roboto;
 }
 
+h1 {
+    font-size: 14px;
+    font-weight: 400;
+    color:#AAAAAA;
+    margin: 4px;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color:#000000;
+    margin: 3px;
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: 400;
+    color:#000000;
+    margin: 3px;
+}
 .mobileversion {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
@@ -25,8 +45,55 @@ body {
 
 .painelmensangem {
     height: 507px;
+    box-sizing: border-box;
+    padding-top: 26px;
 }
 
+.mensagementrar {
+    width: 375px;
+    height: 40px;
+    border-radius: 2px;
+    background-color:#DCDCDC;
+    margin-bottom: 4px;
+    text-align: justify;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 0 9px 0 8px;
+    box-sizing: border-box;
+    color: #000000;
+}
+
+.mensagemtodos{
+    width: 375px;
+    height: 40px;
+    border-radius: 2px;
+    background-color:#FFFFFF;
+    margin-bottom: 4px;
+    text-align: justify;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 0 9px 0 8px;
+    box-sizing: border-box;
+    color: #000000;
+}
+
+.mensagemprivada {
+    width: 375px;
+    height: 40px;
+    border-radius: 2px;
+    background-color:#FFDEDE;
+    margin-bottom: 4px;
+    text-align: justify;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 14px;
+    padding: 0 9px 0 8px;
+    box-sizing: border-box;
+    color: #000000;
+}
 .fundo {
     width: 375px;
     height: 80px;
