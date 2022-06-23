@@ -43,13 +43,14 @@ h3 {
     font-size: 42px;
 }
 
-.painelmensangem {
+.painelmensagem {
     height: 507px;
     box-sizing: border-box;
     padding-top: 26px;
+    overflow-y: scroll;
 }
 
-.mensagementrar {
+.mensagemstatus {
     width: 375px;
     height: 40px;
     border-radius: 2px;
@@ -64,7 +65,7 @@ h3 {
     color: #000000;
 }
 
-.mensagemtodos{
+.mensagemnormal {
     width: 375px;
     height: 40px;
     border-radius: 2px;
@@ -79,7 +80,7 @@ h3 {
     color: #000000;
 }
 
-.mensagemprivada {
+.mensagemreservada {
     width: 375px;
     height: 40px;
     border-radius: 2px;
