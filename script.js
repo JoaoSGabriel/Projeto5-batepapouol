@@ -1,8 +1,11 @@
-let promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
-promisse.then(mensagens);
+setTimeout(contatoservidor, 3000);
 
-function mensagens(resposta) {
-    console.log(resposta.data);
+function contatoservidor () {
+    let promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+    promisse.then(buscarmensagem);
+}
+
+function buscarmensagem(resposta) {
     let mensagenservidor = document.querySelector(".painelmensagem");
     for (let i = 0; i < resposta.data.length; i++) {
         if (resposta.data[i].type === 'message') {
@@ -31,4 +34,12 @@ function mensagens(resposta) {
             </li>`
         }
     }
+}
+
+function enviarmensagem() {
+    let mensagemaenviar = document.querySelector(".mensagempraenviar").value;
+    let requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagemaenviar);
+
+    requisicao.then(envioCorreto);
+    requisicao.catch(envioErrado);
 }
