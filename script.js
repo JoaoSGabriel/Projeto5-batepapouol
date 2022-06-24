@@ -1,21 +1,10 @@
 setInterval(contatoservidor, 3000);
-setInterval(renderizagenteonline, 10000);
 let guardanome;
 let nomeusuario;
-let participantesonline;
-let repo = [];
-entrarnobatepapo();
 buscarparticipantes();
 
-document.getElementById("submit").addEventListener("keypress", clicabotao);
-function clicabotao (elemento) {
-    if(elemento.key === 'Enter') {
-        elemento.click();
-    }
-}
-
-function entrarnobatepapo () {
-nomeusuario = prompt("Qual o seu lindo nome?");
+function entrando() {
+nomeusuario = document.querySelector(".nomedaentrada").value;
 guardanome = {
     name: `${nomeusuario}`,
 }
@@ -26,6 +15,16 @@ requisicao.catch(naopodeEntrar);
 
 function podeEntrar () {
     setInterval(usuarioOnline, 5000);
+    escondetelas();
+}
+
+function escondetelas() {
+    document.querySelector(".teladeentrada").classList.add('usuarioentrou');
+    setTimeout(escondeseguntela, 5000);
+}
+
+function escondeseguntela () {
+    document.querySelector(".telaentradaloading").classList.add('usuarioentrou');
 }
 
 function usuarioOnline () {
@@ -39,19 +38,12 @@ function funcionou () {
 
 function naopodeEntrar () {
     alert("Ops... Parece que já existe alguém com esse nome, tente novamente!");
-    entrarnobatepapo ();
+    
 }
 
 function contatoservidor () {
     let promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     promisse.then(buscarmensagem);
-}
-
-function renderizagenteonline () {
-    repo = [];
-    for (let i = 0; i < participantesonline.length; i++) {
-        repo.push(participantesonline[i].name);
-    }
 }
 
 function buscarmensagem(resposta) {
@@ -71,10 +63,10 @@ function buscarmensagem(resposta) {
             mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemstatus">
             <h1>${resposta.data[i].time}</h1>
             <h2>${resposta.data[i].from}</h2>
-            <h3>entra na sala...</h3>
+            <h3>${resposta.data[i].text}</h3>
             </li>`
         }
-        if ((resposta.data[i].type === 'private_message') && (resposta.data.to == guardanome)) {
+        if ((resposta.data[i].type === 'private_message') && (resposta.data.to == nomeusuario)) {
             mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemreservada">
             <h1>${resposta.data[i].time}</h1>
             <h2>${resposta.data[i].from}</h2>
@@ -84,7 +76,7 @@ function buscarmensagem(resposta) {
             </li>`
         }
     }
-    let autoscroll = document.querySelector("li:nth-child(100)")
+    let autoscroll = document.querySelector(".painelmensagem li:last-child")
     autoscroll.scrollIntoView();
 }
 
