@@ -50,6 +50,11 @@ h3 {
     overflow-y: scroll;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+
 .mensagemstatus {
     width: 375px;
     height: 40px;
@@ -59,7 +64,7 @@ h3 {
     text-align: justify;
     display: flex;
     flex-wrap: wrap;
-    word-wrap: break-word;
+    word-break: break-all;
     align-items: center;
     font-size: 14px;
     padding: 0 9px 0 8px;
@@ -69,14 +74,14 @@ h3 {
 
 .mensagemnormal {
     width: 375px;
-    height: 40px;
+    height: auto;
     border-radius: 2px;
     background-color:#FFFFFF;
     margin-bottom: 4px;
     text-align: justify;
     display: flex;
     flex-wrap: wrap;
-    word-wrap: break-word;
+    word-break: break-all;
     align-items: center;
     font-size: 14px;
     padding: 0 9px 0 8px;
@@ -93,7 +98,7 @@ h3 {
     text-align: justify;
     display: flex;
     flex-wrap: wrap;
-    word-wrap: break-word;
+    word-break: break-all;
     align-items: center;
     font-size: 14px;
     padding: 0 9px 0 8px;

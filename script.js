@@ -79,6 +79,11 @@ function enviarmensagem() {
     let requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagempronta);
     requisicao.then(envioCorreto);
     requisicao.catch(envioIncorreto);
+    
+    let limpainput = document.querySelector(".fundo");
+    limpainput.innerHTML = `<ion-icon name="paper-plane-outline" onclick="enviarmensagem()"></ion-icon>`;
+    limpainput.innerHTML = `<input type="text" class="mensagempraenviar" placeholder="Escreva aqui..."/>
+    <ion-icon name="paper-plane-outline" onclick="enviarmensagem()"></ion-icon>`;
 }
 
 function envioCorreto () {
