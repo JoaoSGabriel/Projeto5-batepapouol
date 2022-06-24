@@ -1,4 +1,35 @@
-setTimeout(contatoservidor, 3000);
+setInterval(contatoservidor, 3000);
+let guardanome;
+let nomeusuario;
+entrarnobatepapo();
+
+function entrarnobatepapo () {
+nomeusuario = prompt("Qual o seu lindo nome?");
+guardanome = {
+    name: `${nomeusuario}`,
+}
+let requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants ", guardanome);
+requisicao.then(podeEntrar);
+requisicao.catch(naopodeEntrar);
+}
+
+function podeEntrar () {
+    setInterval(usuarioOnline, 5000);
+}
+
+function usuarioOnline () {
+    let requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", guardanome);
+    requisicao.then(funcionou);
+}
+
+function funcionou () {
+    return;
+}
+
+function naopodeEntrar () {
+    alert("Ops... Parece que já existe alguém com esse nome, tente novamente");
+    entrarnobatepapo ();
+}
 
 function contatoservidor () {
     let promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
@@ -7,6 +38,7 @@ function contatoservidor () {
 
 function buscarmensagem(resposta) {
     let mensagenservidor = document.querySelector(".painelmensagem");
+    mensagenservidor.innerHTML = '';
     for (let i = 0; i < resposta.data.length; i++) {
         if (resposta.data[i].type === 'message') {
         mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemnormal">
@@ -38,8 +70,21 @@ function buscarmensagem(resposta) {
 
 function enviarmensagem() {
     let mensagemaenviar = document.querySelector(".mensagempraenviar").value;
-    let requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagemaenviar);
-
+    let mensagempronta = {
+        from:`${nomeusuario}`,
+        to: `${todos}`,
+        text: `${mensagemaenviar}`,
+        type: "message",
+    }
+    let requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagempronta);
     requisicao.then(envioCorreto);
-    requisicao.catch(envioErrado);
+    requisicao.catch(envioIncorreto);
+}
+
+function envioCorreto () {
+    contatoservidor();
+}
+
+function envioIncorreto () {
+    window.location.reload();
 }
