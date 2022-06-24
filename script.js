@@ -74,7 +74,7 @@ function buscarmensagem(resposta) {
             <h3>entra na sala...</h3>
             </li>`
         }
-        if (resposta.data[i].type === 'private_message') {
+        if ((resposta.data[i].type === 'private_message') && (resposta.data.to == guardanome)) {
             mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemreservada">
             <h1>${resposta.data[i].time}</h1>
             <h2>${resposta.data[i].from}</h2>
