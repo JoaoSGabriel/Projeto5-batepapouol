@@ -72,7 +72,7 @@ function enviarmensagem() {
     let mensagemaenviar = document.querySelector(".mensagempraenviar").value;
     let mensagempronta = {
         from:`${nomeusuario}`,
-        to: `${todos}`,
+        to: "todos",
         text: `${mensagemaenviar}`,
         type: "message",
     }
