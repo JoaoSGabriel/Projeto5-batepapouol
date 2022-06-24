@@ -21,7 +21,7 @@
         <ul class="painelmensagem"></ul>
         <div class="fundo">
             <input type="text" class="mensagempraenviar" placeholder="Escreva aqui..."/>
-            <ion-icon name="paper-plane-outline" onclick="enviarmensagem()"></ion-icon>
+            <ion-icon id="submit" name="paper-plane-outline" onclick="enviarmensagem()"></ion-icon>
         </div>
         <div class="participanteativo escondido">
             <div onclick="removeabadeparticipante ()" class="fundotransparente"></div>
@@ -36,11 +36,11 @@
                     <li>Escolha a visibilidade:</li>
                 </ul>
                 <div>
-                    <div class="visibilidade" onclick="choose1(this)">
+                    <div class="visibilidade" data-identifier="visibility" onclick="choose1(this)">
                         <div><ion-icon name="lock-open"></ion-icon> Público</div>
                         <div class="icone1 opaco"><ion-icon name="checkmark-sharp"></ion-icon></div>
                     </div>
-                    <div class="visibilidade" onclick="choose1(this)">
+                    <div class="visibilidade" data-identifier="visibility" onclick="choose1(this)">
                         <div><ion-icon name="lock-closed"></ion-icon> Reservadamente</div>
                         <div class="icone1"><ion-icon name="checkmark-sharp"></ion-icon></div>
                     </div>

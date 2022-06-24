@@ -1,8 +1,18 @@
 setInterval(contatoservidor, 3000);
+setInterval(renderizagenteonline, 10000);
 let guardanome;
 let nomeusuario;
+let participantesonline;
+let repo = [];
 entrarnobatepapo();
 buscarparticipantes();
+
+document.getElementById("submit").addEventListener("keypress", clicabotao);
+function clicabotao (elemento) {
+    if(elemento.key === 'Enter') {
+        elemento.click();
+    }
+}
 
 function entrarnobatepapo () {
 nomeusuario = prompt("Qual o seu lindo nome?");
@@ -37,12 +47,19 @@ function contatoservidor () {
     promisse.then(buscarmensagem);
 }
 
+function renderizagenteonline () {
+    repo = [];
+    for (let i = 0; i < participantesonline.length; i++) {
+        repo.push(participantesonline[i].name);
+    }
+}
+
 function buscarmensagem(resposta) {
     let mensagenservidor = document.querySelector(".painelmensagem");
     mensagenservidor.innerHTML = '';
     for (let i = 0; i < resposta.data.length; i++) {
         if (resposta.data[i].type === 'message') {
-        mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemnormal">
+            mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemnormal">
             <h1>${resposta.data[i].time}</h1>
             <h2>${resposta.data[i].from}</h2>
             <h3>para</h3>
@@ -51,14 +68,14 @@ function buscarmensagem(resposta) {
             </li>`
         }
         if (resposta.data[i].type === 'status') {
-        mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemstatus">
+            mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemstatus">
             <h1>${resposta.data[i].time}</h1>
             <h2>${resposta.data[i].from}</h2>
             <h3>entra na sala...</h3>
             </li>`
         }
         if (resposta.data[i].type === 'private_message') {
-        mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemreservada">
+            mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemreservada">
             <h1>${resposta.data[i].time}</h1>
             <h2>${resposta.data[i].from}</h2>
             <h3>reservadamente para</h3>
@@ -67,7 +84,8 @@ function buscarmensagem(resposta) {
             </li>`
         }
     }
-    //Função para scrollar a tela.
+    let autoscroll = document.querySelector("li:nth-child(100)")
+    autoscroll.scrollIntoView();
 }
 
 function enviarmensagem() {
@@ -121,18 +139,19 @@ function choose1 (elemento) {
 }
 
 function buscarparticipantes () {
-   let promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
-   promisse.then(vamosprocurar)
-}
+    let promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+    promisse.then(vamosprocurar)
+ }
 
 function vamosprocurar(resposta) {
+    participantesonline = resposta.data;
     let listadeparticipantes = document.querySelector(".pessoasonline")
     listadeparticipantes.innerHTML = `<div class="usuarios" onclick="choose(this)">
     <div><ion-icon name="people"></ion-icon> Todos</div>
     <div class="icone opaco"><ion-icon name="checkmark-sharp"></ion-icon></div>
 </div>`
     for (let i = 0; i < resposta.data.length; i++) {
-        listadeparticipantes.innerHTML += `<div class="usuarios" onclick="choose(this)">
+        listadeparticipantes.innerHTML += `<div class="usuarios" data-identifier="participant" onclick="choose(this)">
         <div><ion-icon name="person-circle-sharp"></ion-icon> ${resposta.data[i].name}</div>
         <div class="icone"><ion-icon name="checkmark-sharp"></ion-icon></div>
     </div>`
