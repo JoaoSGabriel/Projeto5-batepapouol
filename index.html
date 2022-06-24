@@ -16,12 +16,36 @@
     <div class="mobileversion">
         <div class="topo">
             <img src="./img/logo 1.png" />
-            <ion-icon name="people"></ion-icon>
+            <ion-icon onclick="abadeparticipante ()" name="people"></ion-icon>
         </div>
         <ul class="painelmensagem"></ul>
         <div class="fundo">
             <input type="text" class="mensagempraenviar" placeholder="Escreva aqui..."/>
             <ion-icon name="paper-plane-outline" onclick="enviarmensagem()"></ion-icon>
+        </div>
+        <div class="participanteativo escondido">
+            <div onclick="removeabadeparticipante ()" class="fundotransparente"></div>
+            <div class="informacaodagalera">
+                <ul class="primeirotexto">
+                    <li>Escolha um contato</li>
+                    <li>para enviar mensagem:</li>
+                </ul>
+                <div class="pessoasonline">
+                </div>
+                <ul class="segundotexto">
+                    <li>Escolha a visibilidade:</li>
+                </ul>
+                <div>
+                    <div class="visibilidade" onclick="choose1(this)">
+                        <div><ion-icon name="lock-open"></ion-icon> Público</div>
+                        <div class="icone1 opaco"><ion-icon name="checkmark-sharp"></ion-icon></div>
+                    </div>
+                    <div class="visibilidade" onclick="choose1(this)">
+                        <div><ion-icon name="lock-closed"></ion-icon> Reservadamente</div>
+                        <div class="icone1"><ion-icon name="checkmark-sharp"></ion-icon></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

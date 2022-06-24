@@ -2,6 +2,7 @@ setInterval(contatoservidor, 3000);
 let guardanome;
 let nomeusuario;
 entrarnobatepapo();
+buscarparticipantes();
 
 function entrarnobatepapo () {
 nomeusuario = prompt("Qual o seu lindo nome?");
@@ -27,7 +28,7 @@ function funcionou () {
 }
 
 function naopodeEntrar () {
-    alert("Ops... Parece que já existe alguém com esse nome, tente novamente");
+    alert("Ops... Parece que já existe alguém com esse nome, tente novamente!");
     entrarnobatepapo ();
 }
 
@@ -66,6 +67,7 @@ function buscarmensagem(resposta) {
             </li>`
         }
     }
+    //Função para scrollar a tela.
 }
 
 function enviarmensagem() {
@@ -92,4 +94,49 @@ function envioCorreto () {
 
 function envioIncorreto () {
     window.location.reload();
+}
+
+function abadeparticipante () {
+    document.querySelector(".participanteativo").classList.remove('escondido');
+}
+
+function removeabadeparticipante () {
+    document.querySelector(".participanteativo").classList.add('escondido');
+}
+
+function choose (elemento) {
+    let mensagemparaquem = document.querySelector(".usuarios .opaco")
+    if (mensagemparaquem !== null) {
+        mensagemparaquem.classList.remove('opaco')
+    }
+    elemento.querySelector(".icone").classList.add('opaco');
+}
+
+function choose1 (elemento) {
+    let mensagemparaquem = document.querySelector(".visibilidade .opaco")
+    if (mensagemparaquem !== null) {
+        mensagemparaquem.classList.remove('opaco')
+    }
+    elemento.querySelector(".icone1").classList.add('opaco');
+}
+
+function buscarparticipantes () {
+   let promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+   promisse.then(vamosprocurar)
+}
+
+function vamosprocurar(resposta) {
+    let listadeparticipantes = document.querySelector(".pessoasonline")
+    listadeparticipantes.innerHTML = `<div class="usuarios" onclick="choose(this)">
+    <div><ion-icon name="people"></ion-icon> Todos</div>
+    <div class="icone opaco"><ion-icon name="checkmark-sharp"></ion-icon></div>
+</div>`
+    for (let i = 0; i < resposta.data.length; i++) {
+        listadeparticipantes.innerHTML += `<div class="usuarios" onclick="choose(this)">
+        <div><ion-icon name="person-circle-sharp"></ion-icon> ${resposta.data[i].name}</div>
+        <div class="icone"><ion-icon name="checkmark-sharp"></ion-icon></div>
+    </div>`
+    }
+
+    setTimeout(buscarparticipantes, 10000);
 }
