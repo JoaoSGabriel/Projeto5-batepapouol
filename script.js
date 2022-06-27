@@ -3,6 +3,12 @@ let guardanome;
 let nomeusuario;
 buscarparticipantes();
 
+document.addEventListener("keypress", function(e) {
+    if(e.key==='Enter') {
+        enviarmensagem();
+    }
+});
+
 function entrando() {
 nomeusuario = document.querySelector(".nomedaentrada").value;
 guardanome = {
@@ -66,7 +72,7 @@ function buscarmensagem(resposta) {
             <h3>${resposta.data[i].text}</h3>
             </li>`
         }
-        if ((resposta.data[i].type === 'private_message') && (resposta.data.to == nomeusuario)) {
+        if ((resposta.data.to === nomeusuario) || (resposta.data.from === nomeusuario)) {
             mensagenservidor.innerHTML = mensagenservidor.innerHTML + `<li class="mensagemreservada">
             <h1>${resposta.data[i].time}</h1>
             <h2>${resposta.data[i].from}</h2>

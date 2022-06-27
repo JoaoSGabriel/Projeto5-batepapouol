@@ -57,7 +57,8 @@ h3 {
 
 .mensagemstatus {
     width: 375px;
-    height: 40px;
+    height: auto;
+    line-height: 20px;
     border-radius: 2px;
     background-color:#DCDCDC;
     margin-bottom: 4px;
@@ -75,6 +76,7 @@ h3 {
 .mensagemnormal {
     width: 375px;
     height: auto;
+    line-height: 20px;
     border-radius: 2px;
     background-color:#FFFFFF;
     margin-bottom: 4px;
@@ -91,7 +93,8 @@ h3 {
 
 .mensagemreservada {
     width: 375px;
-    height: 40px;
+    height: auto;
+    line-height: 20px;
     border-radius: 2px;
     background-color:#FFDEDE;
     margin-bottom: 4px;
