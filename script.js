@@ -3,11 +3,20 @@ let guardanome;
 let nomeusuario;
 buscarparticipantes();
 
-document.addEventListener("keypress", function(e) {
+document.querySelector(".nomedaentrada").addEventListener("keypress", function(e) {
     if(e.key==='Enter') {
-        enviarmensagem();
+        entrando();
+        ativaenter();
     }
 });
+
+function ativaenter() {
+    document.querySelector(".mensagempraenviar").addEventListener("keypress", function(e) {
+        if(e.key==='Enter') {
+            enviarmensagem();
+        }
+    });
+}
 
 function entrando() {
 nomeusuario = document.querySelector(".nomedaentrada").value;
@@ -44,7 +53,11 @@ function funcionou () {
 
 function naopodeEntrar () {
     alert("Ops... Parece que já existe alguém com esse nome, tente novamente!");
-    
+    recarregaPagina();
+}
+
+function recarregaPagina() {
+    window.location.reload();
 }
 
 function contatoservidor () {
@@ -102,6 +115,12 @@ function enviarmensagem() {
     limpainput.innerHTML = `<ion-icon name="paper-plane-outline" onclick="enviarmensagem()"></ion-icon>`;
     limpainput.innerHTML = `<input type="text" class="mensagempraenviar" placeholder="Escreva aqui..."/>
     <ion-icon name="paper-plane-outline" onclick="enviarmensagem()"></ion-icon>`;
+
+    document.querySelector(".mensagempraenviar").addEventListener("keypress", function(e) {
+        if(e.key==='Enter') {
+            enviarmensagem();
+        }
+    });
 }
 
 function envioCorreto () {
